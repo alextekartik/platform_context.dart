@@ -4,7 +4,7 @@ Helper to figure out the platform context (browser/io, windows/mac/linux, ie/fir
 
 The `PlatformContext` object can be used in both browser and io application to test the current environment
 
-Web demo: http://alextekartik.github.io/platform_context.dart/build/example/platform_context_browser_example.html
+[Web demo](http://alextekartik.github.io/platform_context_example.dart/build/example/platform_context_browser_example.html)
 
 ## Setup
 
