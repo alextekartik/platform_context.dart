@@ -9,7 +9,11 @@ abstract class Browser {
   bool get isChromeDartium;
   bool get isChromeChromium;
 
+  // If the browser contain the dart vm
   bool get isDartVm;
+
+  // Mobile browser version;
+  bool get isMobile;
 }
 
 abstract class Io {

@@ -143,9 +143,23 @@ class BrowserDetectCommon {
     return _isSafari;
   }
 
-// every browser can be mobile
+  // every browser can be mobile
+  bool _isMobile;
   bool get isMobile {
-    return false;
+    if (_isMobile == null) {
+      _isMobile = _userAgent.contains('Mobile/') ||
+          _userAgent.contains('Mobile ') ||
+          _userAgent.contains(' Mobile');
+    }
+    return _isMobile;
+  }
+
+  bool get isMobileIOS {
+    return isMobile && _userAgent.contains('iPhone OS');
+  }
+
+  bool get isMobileAndroid {
+    return isMobile && _userAgent.contains('Android');
   }
 
   String _userAgent;
@@ -159,8 +173,9 @@ class BrowserDetectCommon {
     _isChrome = null;
     _isSafari = null;
     _isIe = null;
+    _isMobile = null;
 
-    if (userAgent_ != null) {
+    if (_userAgent != null) {
       // ie is tricky as it sets others
       if (isIe) {
         _isFirefox = false;
