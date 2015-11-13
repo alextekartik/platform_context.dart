@@ -1,12 +1,8 @@
 name: platform_context
-version: 0.1.0
+version: 0.1.1
 description: Get the global platform context
 dependencies:
 dev_dependencies:
   test: any
   dev_test: any
   browser: any
-  bootstrap: any
-  dart_to_js_script_rewriter: any
-transformers:
-- dart_to_js_script_rewriter
