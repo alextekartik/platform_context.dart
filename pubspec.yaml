@@ -7,4 +7,6 @@ dev_dependencies:
   dev_test: any
   browser: any
   bootstrap: any
-
+  dart_to_js_script_rewriter: any
+transformers:
+- dart_to_js_script_rewriter
