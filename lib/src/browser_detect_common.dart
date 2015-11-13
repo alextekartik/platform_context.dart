@@ -87,10 +87,13 @@ class BrowserDetectCommon {
   }
 
   Version _browserVersion;
+  bool _isFirefox;
+  bool _isSafari;
+  bool _isMobile;
+  bool _isChrome;
+  bool _isIe;
 
   Version get browserVersion => _browserVersion;
-
-  bool _isIe;
   bool get isIe {
     if (_isIe == null) {
       init();
@@ -102,8 +105,6 @@ class BrowserDetectCommon {
     }
     return _isIe;
   }
-
-  bool _isChrome;
 
   bool get isChrome {
     if (_isChrome == null) {
@@ -122,7 +123,6 @@ class BrowserDetectCommon {
     return isChrome && _userAgent.contains('(Dart)');
   }
 
-  bool _isFirefox;
   bool get isFirefox {
     if (_isFirefox == null) {
       init();
@@ -131,7 +131,6 @@ class BrowserDetectCommon {
     return _isFirefox;
   }
 
-  bool _isSafari;
   bool get isSafari {
     if (_isSafari == null) {
       init();
@@ -144,7 +143,6 @@ class BrowserDetectCommon {
   }
 
   // every browser can be mobile
-  bool _isMobile;
   bool get isMobile {
     if (_isMobile == null) {
       _isMobile = _userAgent.contains('Mobile/') ||
@@ -173,7 +171,9 @@ class BrowserDetectCommon {
     _isChrome = null;
     _isSafari = null;
     _isIe = null;
+
     _isMobile = null;
+    _browserVersion = null;
 
     if (_userAgent != null) {
       // ie is tricky as it sets others

@@ -84,6 +84,17 @@ void defineTests() {
     });
 
     test('chrome', () {
+      // Chrome 46
+      browserDetect.userAgent =
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36";
+      expect(browserDetect.isChrome, isTrue);
+      expect(browserDetect.isChromeChromium, isFalse);
+      expect(browserDetect.isChromeDartium, isFalse);
+      expect(browserDetect.isMobile, isFalse);
+      expect(
+          browserDetect.browserVersion, new Version(46, 0, 2490, build: '86'));
+
+      _checkSingleBrowser();
       browserDetect.userAgent =
           'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36';
       expect(browserDetect.isChrome, isTrue);
@@ -92,6 +103,7 @@ void defineTests() {
       expect(browserDetect.isMobile, isFalse);
       expect(
           browserDetect.browserVersion, new Version(36, 0, 1985, build: '125'));
+
       _checkSingleBrowser();
     });
 
