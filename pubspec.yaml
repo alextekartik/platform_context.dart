@@ -1,0 +1,10 @@
+name: platform_context
+version: 0.1.0
+description: Get the global platform context
+dependencies:
+dev_dependencies:
+  test: any
+  dev_test: any
+  browser: any
+  bootstrap: any
+

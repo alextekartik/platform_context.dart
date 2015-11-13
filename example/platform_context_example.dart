@@ -1,38 +1,8 @@
-# platform context
-
-Helper to figure out the platform context (browser/io, windows/mac/linux, ie/firefox/chrome, dartvm/js)
-
-The `PlatformContext` object can be used in both browser and io application to test the current environment
-
-## Setup
-
-### IO application
-
-```dart
-import 'package:platform_context/context_io.dart';
-
-main() {
-  run(ioPlatformContext);
-}
-```
-
-### Browser application
-
-```
-import 'package:platform_context/context_browser.dart';
-
-main() {
-  run(browserPlatformContext);
-}
-```
-
-## Usage
-
-then you can use the `PlatformContext` object later in your application. The following code can run both on browser and 
-io application
-
-```dart
 import 'package:platform_context/context.dart';
+
+import 'dart:core' hide print;
+
+Function print;
 
 run(PlatformContext context) {
   if (context.io != null) {
@@ -64,4 +34,3 @@ run(PlatformContext context) {
     }
   }
 }
-```
