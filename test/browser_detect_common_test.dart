@@ -83,6 +83,16 @@ void defineTests() {
       _checkSingleBrowser();
     });
 
+    BrowserDetectCommon _fromUserAgent(String userAgent) {
+      BrowserDetectCommon detect = new BrowserDetectCommon()..userAgent = userAgent;
+      return detect;
+    }
+    test('windows', () {
+      // Windows 10 on Chrome (yoga 2 13)
+      var detect = _fromUserAgent("Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.0 (Dart) Safari/537.36");
+      expect(detect.isWindows, isTrue);
+
+    });
     test('chrome', () {
       // Chrome 46
       browserDetect.userAgent =
@@ -95,6 +105,7 @@ void defineTests() {
           browserDetect.browserVersion, new Version(46, 0, 2490, build: '86'));
 
       _checkSingleBrowser();
+
       browserDetect.userAgent =
           'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36';
       expect(browserDetect.isChrome, isTrue);

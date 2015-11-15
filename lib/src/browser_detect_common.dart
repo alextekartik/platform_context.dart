@@ -93,6 +93,10 @@ class BrowserDetectCommon {
   bool _isChrome;
   bool _isIe;
 
+  // OS
+  bool _isWindows;
+
+
   Version get browserVersion => _browserVersion;
   bool get isIe {
     if (_isIe == null) {
@@ -142,6 +146,14 @@ class BrowserDetectCommon {
     return _isSafari;
   }
 
+  // on chrome
+  // on ie:  For Windows environments, value Windows NT 6.3 stands for Win 8.1, Windows NT 6.2 for Win 8, Windows NT 6.1 for Win 7 and so on
+  bool get isWindows {
+    if (_isWindows == null) {
+      _isWindows = _userAgent.contains('Windows');
+    }
+    return _isWindows;
+  }
   // every browser can be mobile
   bool get isMobile {
     if (_isMobile == null) {
@@ -167,6 +179,7 @@ class BrowserDetectCommon {
   set userAgent(String userAgent_) {
     this._userAgent = userAgent_;
 
+    // Navigator
     _isFirefox = null;
     _isChrome = null;
     _isSafari = null;
