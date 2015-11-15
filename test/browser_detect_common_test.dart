@@ -11,7 +11,7 @@ void defineTests() {
   group('browser_detect', () {
     BrowserDetectCommon browserDetect = new BrowserDetectCommon();
 
-    _checkSingleBrowser() {
+    _checkSingle(BrowserDetectCommon browserDetect) {
       if (browserDetect.isChrome) {
         expect(
             browserDetect.isIe ||
@@ -40,7 +40,22 @@ void defineTests() {
                 browserDetect.isChrome,
             isFalse);
       }
+
+      if (browserDetect.isMac) {
+        expect(browserDetect.isWindows || browserDetect.isLinux, isFalse);
+      }
+      if (browserDetect.isWindows) {
+        expect(browserDetect.isMac || browserDetect.isLinux, isFalse);
+      }
+      if (browserDetect.isLinux) {
+        expect(browserDetect.isMac || browserDetect.isWindows, isFalse);
+      }
     }
+
+    _checkSingleBrowser() {
+      _checkSingle(browserDetect);
+    }
+
     tearDown(() {
       // Cleanup any change
       browserDetect.userAgent = null;
@@ -84,15 +99,39 @@ void defineTests() {
     });
 
     BrowserDetectCommon _fromUserAgent(String userAgent) {
-      BrowserDetectCommon detect = new BrowserDetectCommon()..userAgent = userAgent;
+      BrowserDetectCommon detect = new BrowserDetectCommon()
+        ..userAgent = userAgent;
       return detect;
     }
     test('windows', () {
       // Windows 10 on Chrome (yoga 2 13)
-      var detect = _fromUserAgent("Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.0 (Dart) Safari/537.36");
+      var detect = _fromUserAgent(
+          "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.0 (Dart) Safari/537.36");
       expect(detect.isWindows, isTrue);
+      _checkSingle(detect);
 
+      // Windows 10 on firefox
+      detect = _fromUserAgent(
+          "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0");
+      expect(detect.isWindows, isTrue);
+      _checkSingle(detect);
     });
+
+    test('mac', () {
+      var detect = _fromUserAgent(
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36");
+      expect(detect.isMac, isTrue);
+      _checkSingle(detect);
+    });
+
+    test('linux', () {
+      var detect = _fromUserAgent(
+          "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/45.0.2454.101 Chrome/45.0.2454.101 Safari/537.36");
+      expect(detect.isLinux, isTrue);
+      _checkSingle(detect);
+      ;
+    });
+
     test('chrome', () {
       // Chrome 46
       browserDetect.userAgent =

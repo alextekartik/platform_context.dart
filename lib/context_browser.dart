@@ -39,6 +39,10 @@ class _Browser implements Browser {
     if (isDartVm) {
       map['dartVm'] = true;
     }
+    String platform = _platformText;
+    if (_platformText != null) {
+      map['platform'] = platform;
+    }
     return map;
   }
 
@@ -64,6 +68,27 @@ class _Browser implements Browser {
 
   @override
   bool get isMobile => _detect.isMobile;
+
+  @override
+  bool get isWindows => _detect.isWindows;
+
+  @override
+  bool get isMac => _detect.isMac;
+
+  @override
+  bool get isLinux => _detect.isLinux;
+
+  String get _platformText {
+    String platform;
+    if (isWindows) {
+      platform = 'windows';
+    } else if (isMac) {
+      platform = 'mac';
+    } else if (isLinux) {
+      platform = 'linux';
+    }
+    return platform;
+  }
 }
 
 class _IoPlatformContext implements PlatformContext {

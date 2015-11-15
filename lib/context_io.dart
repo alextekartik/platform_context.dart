@@ -33,7 +33,7 @@ class _Io implements Io {
   ///
   String get versionText => Platform.version;
 
-  String get platformText {
+  String get _platformText {
     String platform;
     if (isLinux) {
       platform = 'linux';
@@ -52,7 +52,7 @@ class _Io implements Io {
 
   Map toMap() {
     Map map = {};
-    map['platform'] = platformText;
+    map['platform'] = _platformText;
     return map;
   }
 }

@@ -95,7 +95,8 @@ class BrowserDetectCommon {
 
   // OS
   bool _isWindows;
-
+  bool _isMac;
+  bool _isLinux;
 
   Version get browserVersion => _browserVersion;
   bool get isIe {
@@ -154,6 +155,21 @@ class BrowserDetectCommon {
     }
     return _isWindows;
   }
+
+  bool get isMac {
+    if (_isMac == null) {
+      _isMac = _userAgent.contains('Macintosh');
+    }
+    return _isMac;
+  }
+
+  bool get isLinux {
+    if (_isLinux == null) {
+      _isLinux = _userAgent.contains('Linux');
+    }
+    return _isLinux;
+  }
+
   // every browser can be mobile
   bool get isMobile {
     if (_isMobile == null) {

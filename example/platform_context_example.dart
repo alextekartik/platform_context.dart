@@ -27,6 +27,10 @@ run(PlatformContext context) {
       print('We are on IE/Edga');
     }
 
+    if (context.browser.isWindows) {
+      print('We are on Windows');
+    }
+
     if (context.browser.isDartVm) {
       print('We are running on Dart VM');
     } else {

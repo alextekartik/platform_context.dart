@@ -14,6 +14,11 @@ abstract class Browser {
 
   // Mobile browser version;
   bool get isMobile;
+
+  // Desktop
+  bool get isWindows;
+  bool get isMac;
+  bool get isLinux;
 }
 
 abstract class Io {
