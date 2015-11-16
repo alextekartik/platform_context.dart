@@ -9,6 +9,9 @@ abstract class Browser {
   bool get isChromeDartium;
   bool get isChromeChromium;
 
+  // browser version
+  bool get version;
+
   // If the browser contain the dart vm
   bool get isDartVm;
 

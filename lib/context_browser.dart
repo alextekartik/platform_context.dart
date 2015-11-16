@@ -27,6 +27,7 @@ class _Browser implements Browser {
     return navigator;
   }
 
+  @override
   Version get version => _detect.browserVersion;
 
   @override
@@ -36,12 +37,12 @@ class _Browser implements Browser {
     Map map = {};
     map['navigator'] = navigatorText;
     map['version'] = version.toString();
-    if (isDartVm) {
-      map['dartVm'] = true;
-    }
     String platform = _platformText;
     if (_platformText != null) {
       map['platform'] = platform;
+    }
+    if (isDartVm) {
+      map['dartVm'] = true;
     }
     return map;
   }

@@ -27,8 +27,18 @@ run(PlatformContext context) {
       print('We are on IE/Edga');
     }
 
+    print('version ${context.browser.version}');
+
     if (context.browser.isWindows) {
       print('We are on Windows');
+    } else if (context.browser.isMac) {
+      print('We are on Mac');
+    } else if (context.browser.isLinux) {
+      print('We are on Linux');
+    }
+
+    if (context.browser.isMobile) {
+      print('We are on Mobile');
     }
 
     if (context.browser.isDartVm) {
