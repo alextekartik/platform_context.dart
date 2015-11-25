@@ -65,7 +65,7 @@ class _Browser implements Browser {
 
   // Ugly way to test if running as dart or javascript
   @override
-  bool get isDartVm => !identical(1.0, 1);
+  bool get isDartVm => !isRunningAsJavascript;
 
   @override
   bool get isMobile => _detect.isMobile;

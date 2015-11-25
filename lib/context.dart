@@ -1,5 +1,7 @@
 library tekartik_platform_context.context;
 
+import 'package:pub_semver/pub_semver.dart';
+
 abstract class Browser {
   bool get isIe;
   bool get isFirefox;
@@ -10,7 +12,7 @@ abstract class Browser {
   bool get isChromeChromium;
 
   // browser version
-  bool get version;
+  Version get version;
 
   // If the browser contain the dart vm
   bool get isDartVm;
