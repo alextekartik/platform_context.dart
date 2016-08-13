@@ -1,7 +1,10 @@
 library tekartik_platform_context.context_io;
 
-import 'context.dart';
 import 'dart:io';
+
+import 'context.dart';
+
+export 'context.dart';
 
 class _Io implements Io {
   ///
@@ -73,4 +76,7 @@ class _IoPlatformContext implements PlatformContext {
   }
 }
 
-final PlatformContext ioPlatformContext = new _IoPlatformContext();
+PlatformContext _ioPlatformContext;
+
+PlatformContext get ioPlatformContext =>
+    _ioPlatformContext = new _IoPlatformContext();
