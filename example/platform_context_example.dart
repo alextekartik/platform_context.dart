@@ -42,9 +42,9 @@ run(PlatformContext context) {
     }
 
     if (context.browser.isDartVm) {
-      print('We are running on Dart VM');
+      print('We are running on a browser Dart VM');
     } else {
-      print('We are running on Javascript VM');
+      print('We are running on a browser with a Javascript VM');
     }
   }
 }

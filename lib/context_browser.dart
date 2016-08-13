@@ -3,6 +3,7 @@ library tekartik_platform_context.context_browser;
 import 'context.dart';
 import 'src/browser_detect.dart';
 import 'package:pub_semver/pub_semver.dart';
+export 'context.dart';
 
 class _Browser implements Browser {
   BrowserDetect _detect = new BrowserDetect();
@@ -92,11 +93,15 @@ class _Browser implements Browser {
   }
 }
 
-class _IoPlatformContext implements PlatformContext {
+class _BrowserPlatformContext implements PlatformContext {
   Io get io => null;
 
   // non null if in io
   final _Browser browser = new _Browser();
+
+  _BrowserPlatformContext() {
+    browser._detect.init();
+  }
 
   @override
   String toString() => toMap().toString();
@@ -108,4 +113,5 @@ class _IoPlatformContext implements PlatformContext {
   }
 }
 
-final PlatformContext browserPlatformContext = new _IoPlatformContext();
+PlatformContext _browserPlatformContext;
+PlatformContext get browserPlatformContext => _browserPlatformContext ??= new _BrowserPlatformContext();
