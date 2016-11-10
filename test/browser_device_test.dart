@@ -1,76 +1,69 @@
 library browser_detect_utils_common_test;
+import 'user_agents.dart';
 
 //import 'package:tekartik_utils/dev_utils.dart';
-import 'package:platform_context/src/browser_detect_common.dart';
 import 'package:dev_test/test.dart';
-import 'package:pub_semver/pub_semver.dart';
+import 'package:platform_context/src/browser/device.dart';
+import 'package:platform_context/src/browser_detect_common.dart';
 
 void main() => defineTests();
 
 void defineTests() {
-  group('browser_detect', () {
-    BrowserDetectCommon browserDetect = new BrowserDetectCommon();
-
-    _checkSingle(BrowserDetectCommon browserDetect) {
-      if (browserDetect.isChrome) {
+  group('browser_device', () {
+    _checkSingle(Device device) {
+      if (device.isIPad) {
         expect(
-            browserDetect.isIe ||
-                browserDetect.isFirefox ||
-                browserDetect.isSafari,
+            device.isIPod ||
+                device.isIPhone,
             isFalse);
       }
-      if (browserDetect.isSafari) {
+      if (device.isIPod) {
         expect(
-            browserDetect.isIe ||
-                browserDetect.isFirefox ||
-                browserDetect.isChrome,
+            device.isIPad ||
+                device.isIPhone,
             isFalse);
       }
-      if (browserDetect.isIe) {
+      if (device.isIPhone) {
         expect(
-            browserDetect.isSafari ||
-                browserDetect.isFirefox ||
-                browserDetect.isChrome,
+            device.isIPad ||
+                device.isIPod ,
             isFalse);
-      }
-      if (browserDetect.isFirefox) {
-        expect(
-            browserDetect.isIe ||
-                browserDetect.isSafari ||
-                browserDetect.isChrome,
-            isFalse);
-      }
-
-      if (browserDetect.isMac) {
-        expect(browserDetect.isWindows || browserDetect.isLinux, isFalse);
-      }
-      if (browserDetect.isWindows) {
-        expect(browserDetect.isMac || browserDetect.isLinux, isFalse);
-      }
-      if (browserDetect.isLinux) {
-        expect(browserDetect.isMac || browserDetect.isWindows, isFalse);
       }
     }
 
-    _checkSingleBrowser() {
-      _checkSingle(browserDetect);
+    Device _fromUserAgent(String userAgent) {
+      Device device =
+          new Device(new BrowserDetectCommon()..userAgent = userAgent);
+      _checkSingle(device);
+      return device;
     }
 
     tearDown(() {
       // Cleanup any change
-      browserDetect.userAgent = null;
     });
 
     test('safari', () {
       // OS X 10.10.5
-      browserDetect.userAgent =
-          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/601.1.56 (KHTML, like Gecko) Version/9.0 Safari/601.1.56';
-      expect(browserDetect.isSafari, isTrue);
-      expect(browserDetect.browserVersion, new Version(9, 0, 0));
-      expect(browserDetect.isMobile, isFalse);
-      _checkSingleBrowser();
+      var device = _fromUserAgent(
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/601.1.56 (KHTML, like Gecko) Version/9.0 Safari/601.1.56');
+      expect(device.isMobile, isFalse);
     });
 
+    test('iPad', () {
+      // iPad2
+      var device = _fromUserAgent(iPad2_Safari_OS9);
+      expect(device.isIPad, isTrue);
+    });
+
+    test('iPhone', () {
+      // iPad2
+      var device = _fromUserAgent(
+          "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13A344 Safari/601.1");
+      expect(device.isIPhone, isTrue);
+    });
+
+
+    /*
     test('ie', () {
       browserDetect.userAgent =
           'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; .NET4.0E; .NET4.0C; .NET CLR 3.5.30729; .NET CLR 2.0.50727; .NET CLR 3.0.30729; Tablet PC 2.0; MALNJS; rv:11.0) like Gecko';
@@ -181,10 +174,9 @@ void defineTests() {
       _checkSingleBrowser();
     });
 
-    test('iPad', () {
+    solo_test('iPad', () {
       // iPad2
-      browserDetect.userAgent =
-          "Mozilla/5.0 (iPad; CPU OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B176 Safari/7534.48.3";
+      browserDetect.userAgent ="Mozilla/5.0 (iPad; CPU OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B176 Safari/7534.48.3";
       expect(browserDetect.isSafari, isTrue);
       expect(browserDetect.isMobile, isTrue);
       expect(browserDetect.browserVersion, new Version(5, 1, 0));
@@ -226,5 +218,6 @@ void defineTests() {
           browserDetect.browserVersion, new Version(46, 0, 2490, build: "76"));
       _checkSingleBrowser();
     });
+  */
   });
 }

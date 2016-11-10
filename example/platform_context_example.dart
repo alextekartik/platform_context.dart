@@ -29,14 +29,23 @@ run(PlatformContext context) {
 
     print('version ${context.browser.version}');
 
-    if (context.browser.isWindows) {
+    BrowserOperatingSystem os = context.browser.os;
+    if (os.isWindows) {
       print('We are on Windows');
-    } else if (context.browser.isMac) {
+    }
+    if (os.isMac) {
       print('We are on Mac');
-    } else if (context.browser.isLinux) {
+    }
+    if (os.isLinux) {
       print('We are on Linux');
     }
 
+    if (os.isIOS) {
+      print('We are on IOS');
+    }
+    if (os.isAndroid) {
+      print('We are on Android');
+    }
     if (context.browser.isMobile) {
       print('We are on Mobile');
     }

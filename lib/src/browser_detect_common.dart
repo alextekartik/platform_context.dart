@@ -101,9 +101,23 @@ class BrowserDetectCommon {
   bool _isMac;
   bool _isLinux;
 
+  bool _isIos;
+
   Version get browserVersion => _browserVersion;
   bool get isIe {
     if (_isIe == null) {
+      init();
+      // Edge 12 and over
+      _isIe = _checkAndGetVersion('Edge');
+      if (_isIe == false) {
+        _isIe = _checkAndGetVersion('Trident');
+      }
+    }
+    return _isIe;
+  }
+
+  bool get isIos {
+    if (_isIos == null) {
       init();
       // Edge 12 and over
       _isIe = _checkAndGetVersion('Edge');
@@ -184,7 +198,31 @@ class BrowserDetectCommon {
   }
 
   bool get isMobileIOS {
-    return isMobile && _userAgent.contains('iPhone OS');
+    return isMobile && (_canBeIPad || _canBeIPod || _canBeIPhone);
+  }
+
+  bool get _canBeIPhone {
+    return _userAgent.contains('iPhone');
+  }
+
+  bool get isMobileIPhone {
+    return isMobile && _canBeIPhone;
+  }
+
+  bool get isMobileIPad {
+    return isMobile && _canBeIPad;
+  }
+
+  bool get _canBeIPad {
+    return _userAgent.contains('iPad');
+  }
+
+  bool get isMobileIPod {
+    return isMobile && _canBeIPod;
+  }
+
+  bool get _canBeIPod {
+    return _userAgent.contains('iPod');
   }
 
   bool get isMobileAndroid {
@@ -206,6 +244,7 @@ class BrowserDetectCommon {
 
     _isMobile = null;
     _browserVersion = null;
+    _isIos = null;
 
     if (_userAgent != null) {
       // ie is tricky as it sets others

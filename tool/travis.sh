@@ -7,4 +7,5 @@ dartanalyzer --fatal-warnings \
   lib/context_browser.dart \
   lib/context_io.dart
 
-pub run test -p vm,firefox
+pub run test -p vm
+pub run test -p firefox,chrome

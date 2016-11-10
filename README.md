@@ -56,7 +56,7 @@ run(PlatformContext context) {
     } else if (context.browser.isFirefox) {
       print('We are on Firefox');
     } else if (context.browser.isIe) {
-      print('We are on IE/Edga');
+      print('We are on IE/Edge');
     }
 
     if (context.browser.isDartVm) {
