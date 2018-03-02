@@ -1,4 +1,5 @@
 library browser_detect_utils_common_test;
+
 import 'user_agents.dart';
 
 //import 'package:tekartik_utils/dev_utils.dart';
@@ -12,22 +13,13 @@ void defineTests() {
   group('browser_device', () {
     _checkSingle(Device device) {
       if (device.isIPad) {
-        expect(
-            device.isIPod ||
-                device.isIPhone,
-            isFalse);
+        expect(device.isIPod || device.isIPhone, isFalse);
       }
       if (device.isIPod) {
-        expect(
-            device.isIPad ||
-                device.isIPhone,
-            isFalse);
+        expect(device.isIPad || device.isIPhone, isFalse);
       }
       if (device.isIPhone) {
-        expect(
-            device.isIPad ||
-                device.isIPod ,
-            isFalse);
+        expect(device.isIPad || device.isIPod, isFalse);
       }
     }
 
@@ -61,7 +53,6 @@ void defineTests() {
           "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13A344 Safari/601.1");
       expect(device.isIPhone, isTrue);
     });
-
 
     /*
     test('ie', () {

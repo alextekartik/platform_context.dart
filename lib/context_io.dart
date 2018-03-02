@@ -79,4 +79,4 @@ class _IoPlatformContext implements PlatformContext {
 PlatformContext _ioPlatformContext;
 
 PlatformContext get ioPlatformContext =>
-    _ioPlatformContext = new _IoPlatformContext();
+    _ioPlatformContext ??= new _IoPlatformContext();
