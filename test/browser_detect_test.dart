@@ -33,11 +33,13 @@ void main() {
 
     test('chrome', () {
       expect(isChrome, isTrue);
-    }, testOn: "chrome || dartium || content-shell");
+    }, testOn: "chrome");
 
+    /*
     test('dartium', () {
       expect(isChromeDartium, isTrue);
     }, testOn: "dartium || content-shell");
+    */
 
     test('firefox', () {
       expect(isFirefox, isTrue);

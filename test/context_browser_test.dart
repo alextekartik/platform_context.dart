@@ -17,12 +17,14 @@ void main() {
       expect(context.browser.isDartVm, isFalse);
     }, testOn: "chrome");
 
+    /*
     test('dartium', () {
       expect(context.browser.isChrome, isTrue);
       expect(context.browser.isChromeDartium, isTrue);
       expect(context.browser.isChromeChromium, isFalse);
       expect(context.browser.isDartVm, isTrue);
     }, testOn: "dartium || content-shell");
+    */
 
     test('firefox', () {
       expect(context.browser.isFirefox, isTrue);
