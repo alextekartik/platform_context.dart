@@ -1,5 +1,7 @@
 # platform context
 
+** DEPRECATED **
+
 Helper to figure out the platform context (browser/io, windows/mac/linux, ie/firefox/chrome, dartvm/js)
 
 The `PlatformContext` object can be used in both browser and io application to test the current environment
